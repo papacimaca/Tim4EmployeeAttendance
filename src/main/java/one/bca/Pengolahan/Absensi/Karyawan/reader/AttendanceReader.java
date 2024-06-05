@@ -17,7 +17,7 @@ public class AttendanceReader {
     }
     public static String ORDER_SQL = "select "
             + "employee_id, employee_name, date, "
-            + "clock_in, clock_out, overtime "
+            + "clock_in, clock_out, overtime, leave_status "
             + "from attendance order by employee_id";
 
     public ItemReader<Attendance> itemReader() {

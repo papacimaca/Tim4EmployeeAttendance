@@ -47,7 +47,7 @@ public class JobConfiguration {
                     @Override
                     public Attendance process(Attendance item) throws Exception {
                         //TODO: LOGIC
-                        return null;
+                        return item;
                     }
                 })
                 .writer(new ItemWriter<Attendance>() {
