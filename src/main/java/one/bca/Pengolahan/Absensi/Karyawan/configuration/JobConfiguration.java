@@ -13,43 +13,27 @@ public class JobConfiguration {
     private final DataSourceTransactionManager transactionManager;
     private final EmployeeConfiguration employeeConfiguration;
     private final AttendanceConfiguration attendanceConfiguration;
+    private final ReportConfiguration reportConfiguration;
 
     public JobConfiguration(JobRepository jobRepository,
-                              DataSourceTransactionManager transactionManager,
-                              EmployeeConfiguration employeeConfiguration,
-                              AttendanceConfiguration attendanceConfiguration) {
+                            DataSourceTransactionManager transactionManager,
+                            EmployeeConfiguration employeeConfiguration,
+                            AttendanceConfiguration attendanceConfiguration,
+                            ReportConfiguration reportConfiguration) {
         this.jobRepository = jobRepository;
         this.transactionManager = transactionManager;
         this.employeeConfiguration = employeeConfiguration;
         this.attendanceConfiguration = attendanceConfiguration;
+        this.reportConfiguration = reportConfiguration;
     }
 
-    public Job monthlyReportJob() {
-        return new JobBuilder("monthlyReportJob", jobRepository)
+    public Job writeReportJob() {
+        return new JobBuilder("writeReportJob", jobRepository)
                 .start(employeeConfiguration.getEmployeeStep())
                 .next(attendanceConfiguration.attendanceStep())
+                .next(reportConfiguration.writeReportStep())
                 .build();
     }
 
-//    public Step getAttendanceStep(){
-//        return new StepBuilder("getAttendanceStep",jobRepository)
-//                .<EmployeeAttendance, EmployeeAttendance>chunk(4, transactionManager)
-//                .reader(attendanceReader.itemReader())
-//                .processor(new ItemProcessor<EmployeeAttendance, EmployeeAttendance>() {
-//                    @Override
-//                    public EmployeeAttendance process(EmployeeAttendance item) throws Exception {
-//                        //TODO: LOGIC
-//                        return item;
-//                    }
-//                })
-//                .writer(new ItemWriter<EmployeeAttendance>() {
-//                    @Override
-//                    public void write(Chunk<? extends EmployeeAttendance> chunk) throws Exception {
-//                        System.out.println("START WRITE ITEM FROM DB");
-//
-//                        System.out.println("Attendance data: " + chunk.getItems());
-//                    }
-//                }).build();
-//    }
 
 }

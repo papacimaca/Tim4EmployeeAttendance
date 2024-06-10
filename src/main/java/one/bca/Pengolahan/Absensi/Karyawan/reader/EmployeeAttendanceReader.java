@@ -2,7 +2,9 @@ package one.bca.Pengolahan.Absensi.Karyawan.reader;
 
 
 import one.bca.Pengolahan.Absensi.Karyawan.mapper.EmployeeAttendanceRowMapper;
+import one.bca.Pengolahan.Absensi.Karyawan.mapper.ReportRowMapper;
 import one.bca.Pengolahan.Absensi.Karyawan.model.EmployeeAttendance;
+import one.bca.Pengolahan.Absensi.Karyawan.model.Report;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -16,7 +18,7 @@ public class EmployeeAttendanceReader {
         this.transactionManager = transactionManager;
     }
     public static String READ_EMPLOYEE_ATTENDANCE_SQL = "select "
-            + "employee_id, date, "
+            + "employee_id, employee_name, date, "
             + "clock_in, clock_out, overtime, leave_status "
             + "from employee_attendance order by employee_id";
 
