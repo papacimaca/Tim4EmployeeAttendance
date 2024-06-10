@@ -43,7 +43,7 @@ public class AttendanceConfiguration {
                         new ItemProcessor<Attendance, EmployeeAttendance>() {
                             @Override
                             public EmployeeAttendance process(Attendance attendance) throws Exception {
-                                System.out.println("START PROCESSING SHIPPED INFO FROM CSV");
+                                System.out.println("START PROCESSING EMPLOYEE ATTENDANCE INFO FROM CSV");
                                 StepContext stepContext = StepSynchronizationManager.getContext();
                                 List<Employee> processedEmployees = (List<Employee>) stepContext
                                         .getStepExecution()

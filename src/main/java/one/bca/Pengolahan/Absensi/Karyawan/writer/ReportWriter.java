@@ -5,21 +5,23 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
+@Configuration
 public class ReportWriter {
 
     public static String[] names = new String[] {"employeeId", "employeeName",
-            "month", "attendanceCount", "overtimeHoursTotal",
+            "attendanceCount", "overtimeHoursTotal",
             "leaveCount", "leaveRemaining"};
 
     public ItemWriter<Report> itemWriter() {
         FlatFileItemWriter<Report> itemWriter = new FlatFileItemWriter<>();
 
-        itemWriter.setResource(new FileSystemResource("data/monthly_report_output.csv"));
+        itemWriter.setResource(new FileSystemResource("data/report_output.csv"));
 
         DelimitedLineAggregator<Report> aggregator = new DelimitedLineAggregator<>();
-        aggregator.setDelimiter(",");
+        aggregator.setDelimiter(";");
 
         BeanWrapperFieldExtractor<Report> fieldExtractor = new BeanWrapperFieldExtractor<>();
         fieldExtractor.setNames(names);

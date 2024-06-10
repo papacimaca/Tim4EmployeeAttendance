@@ -12,7 +12,6 @@ public class ReportFieldSetMapper implements FieldSetMapper<Report> {
         Report report = new Report();
         report.setEmployeeId(fieldSet.readString("employee_id"));
         report.setEmployeeName(fieldSet.readString("employee_name"));
-        report.setMonth(fieldSet.readString("month"));
         report.setAttendanceCount(fieldSet.readInt("attendance_count"));
         report.setOvertimeHoursTotal(fieldSet.readInt("overtime_hours_total"));
         report.setLeaveCount(fieldSet.readInt("leave_count"));
