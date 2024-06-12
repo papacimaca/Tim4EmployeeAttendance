@@ -3,6 +3,7 @@ package one.bca.Pengolahan.Absensi.Karyawan.configuration;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -27,8 +28,9 @@ public class JobConfiguration {
         this.reportConfiguration = reportConfiguration;
     }
 
+    @Bean(name = "job")
     public Job writeReportJob() {
-        return new JobBuilder("writeReportJob", jobRepository)
+        return new JobBuilder("writeReportJob V1", jobRepository)
                 .start(employeeConfiguration.getEmployeeStep())
                 .next(attendanceConfiguration.attendanceStep())
                 .next(reportConfiguration.writeReportStep())
