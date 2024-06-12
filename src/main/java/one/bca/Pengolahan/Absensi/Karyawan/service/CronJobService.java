@@ -19,7 +19,7 @@ public class CronJobService {
             JobParameters jobParameters = new JobParametersBuilder()
                     .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
-            jobLauncher.run(jobConfiguration.monthlyReportJob(), jobParameters);
+            jobLauncher.run(jobConfiguration.writeReportJob(), jobParameters);
             System.out.println ("Job started successfully");
         } catch (Exception e) {
             System.out.println("Job failed to start: " + e.getMessage());
