@@ -1,5 +1,6 @@
 package one.bca.Pengolahan.Absensi.Karyawan.configuration;
 
+import one.bca.Pengolahan.Absensi.Karyawan.listener.CustomRetryListener;
 import one.bca.Pengolahan.Absensi.Karyawan.model.Employee;
 import one.bca.Pengolahan.Absensi.Karyawan.reader.EmployeeReader;
 import org.springframework.batch.core.Job;
@@ -15,8 +16,10 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import java.net.http.HttpConnectTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 @Configuration
 public class EmployeeConfiguration {
@@ -62,6 +65,11 @@ public class EmployeeConfiguration {
                         return employee;
                     }
                 })
+                .faultTolerant()
+                .retryLimit(5)
+                .retry(TimeoutException.class)
+                .retry(HttpConnectTimeoutException.class)
+                .listener(CustomRetryListener.class)
                 .writer(new ItemWriter<Employee>() {
                     @Override
                     public void write(Chunk<? extends Employee> chunk) throws Exception {
