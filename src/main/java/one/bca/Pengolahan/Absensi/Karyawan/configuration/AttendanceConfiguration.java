@@ -1,5 +1,6 @@
 package one.bca.Pengolahan.Absensi.Karyawan.configuration;
 
+import one.bca.Pengolahan.Absensi.Karyawan.listener.CustomRetryListener;
 import one.bca.Pengolahan.Absensi.Karyawan.model.Attendance;
 import one.bca.Pengolahan.Absensi.Karyawan.model.Employee;
 import one.bca.Pengolahan.Absensi.Karyawan.model.EmployeeAttendance;
@@ -12,10 +13,14 @@ import org.springframework.batch.core.scope.context.StepSynchronizationManager;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 
+import java.net.http.HttpConnectTimeoutException;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 @Configuration
 @Component
@@ -70,7 +75,17 @@ public class AttendanceConfiguration {
                             }
                         }
                 )
+                .faultTolerant()
+                .retryLimit(5)
+                .retry(TimeoutException.class)
+                .retry(HttpConnectTimeoutException.class)
+                .listener(CustomRetryListener.class)
                 .writer(employeeAttendanceWriter.employeeAttendanceItemWriter(transactionManager.getDataSource()))
+                .taskExecutor(taskExecutor())
                 .build();
+    }
+
+    public TaskExecutor taskExecutor() {
+        return new SimpleAsyncTaskExecutor("attendanceMultithreadingTaskExecutor");
     }
 }
