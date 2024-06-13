@@ -23,7 +23,6 @@ public class EmployeeAttendanceReader {
             + "from employee_attendance order by employee_id";
 
     public ItemReader<EmployeeAttendance> itemReader() {
-        System.out.println("START READ ITEM FROM DB");
         return new JdbcCursorItemReaderBuilder<EmployeeAttendance>()
                 .dataSource(transactionManager.getDataSource())
                 .name("jdbcCursorItemReader")

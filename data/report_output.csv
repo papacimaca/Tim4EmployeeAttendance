@@ -1,10 +1,11 @@
-AA01;John Smith;1428;340;34;-20
-AA02;Emily Johnson;1462;306;0;14
-AA03;Michael Brown;1394;374;68;-54
-AA04;Sarah Davis;1428;102;34;-20
-AA05;David Wilson;1394;136;68;-54
-AA06;Jessica Moore;1428;238;34;-20
-AA07;Daniel Taylor;1428;102;34;-20
-AA08;Laura Anderson;1292;272;170;-156
-AA09;Robert Thomas;1394;306;68;-54
-AA10;Emma Jackson;1360;136;102;-88
+employeeId,employeeName,attendanceCount,overtimeHoursTotal,leaveCount,leaveRemaining
+AA01,John Smith,42,10,1,13
+AA02,Emily Johnson,43,9,0,14
+AA03,Michael Brown,41,11,2,12
+AA04,Sarah Davis,42,3,1,13
+AA05,David Wilson,41,4,2,12
+AA06,Jessica Moore,42,7,1,13
+AA07,Daniel Taylor,42,3,1,13
+AA08,Laura Anderson,38,8,5,9
+AA09,Robert Thomas,41,9,2,12
+AA10,Emma Jackson,40,4,3,11

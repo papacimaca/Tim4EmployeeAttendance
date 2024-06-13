@@ -42,7 +42,6 @@ public class EmployeeConfiguration {
                 .processor(new ItemProcessor<Employee, Employee>() {
                     @Override
                     public Employee process(Employee employee) throws Exception {
-                        System.out.println("START PROCESSING EMPLOYEE FROM DB");
                         StepContext stepContext = StepSynchronizationManager.getContext();
                         List<Employee> processedEmployees = (List<Employee>) stepContext
                                 .getStepExecution()
@@ -55,7 +54,6 @@ public class EmployeeConfiguration {
                         } else {
                             processedEmployees.add(employee);
                         }
-                        System.out.println("START PUTTING ITEM FORM DB TO STEP CONTEXT");
                         stepContext
                                 .getStepExecution()
                                 .getJobExecution()
@@ -73,7 +71,6 @@ public class EmployeeConfiguration {
                 .writer(new ItemWriter<Employee>() {
                     @Override
                     public void write(Chunk<? extends Employee> chunk) throws Exception {
-                        System.out.println("START WRITE ITEM FROM DB");
                         StepContext stepContext = StepSynchronizationManager.getContext();
                         List<Employee> processedEmployees = (List<Employee>) stepContext
                                 .getJobExecutionContext()

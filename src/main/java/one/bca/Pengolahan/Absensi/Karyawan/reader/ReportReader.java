@@ -26,7 +26,6 @@ public class ReportReader {
             "from public.employee_attendance ea";
 
     public ItemReader<Report> itemReader() {
-        System.out.println("START READ ITEM FROM DB");
         return new JdbcCursorItemReaderBuilder<Report>()
                 .dataSource(transactionManager.getDataSource())
                 .name("jdbcCursorItemReader")

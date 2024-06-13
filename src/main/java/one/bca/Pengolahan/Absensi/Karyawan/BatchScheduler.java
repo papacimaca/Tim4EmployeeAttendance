@@ -1,5 +1,6 @@
 package one.bca.Pengolahan.Absensi.Karyawan;
 
+import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
 import one.bca.Pengolahan.Absensi.Karyawan.configuration.JobConfiguration;
 import org.springframework.batch.core.JobParameters;
@@ -22,9 +23,23 @@ public class BatchScheduler {
         this.jobLauncher = jobLauncher;
     }
 
-    @SneakyThrows
     //for testing job run every 15 seconds
-    @Scheduled(cron = "0/15 * * * * ?")
+//    @Scheduled(cron = "0/15 * * * * ?")
+//    public void startJob() {
+//        try {
+//            JobParameters jobParameters = new JobParametersBuilder()
+//                    .addLong("time", System.currentTimeMillis())
+//                    .toJobParameters();
+//            jobLauncher.run(jobConfiguration.writeReportJob(), jobParameters);
+//            System.out.println ("Job started successfully");
+//        } catch (Exception e) {
+//            System.out.println("Job failed to start: " + e.getMessage());
+//        }
+//
+//    }
+
+    // At 00:00:00 on day-of-month 1 each month
+    @Scheduled(cron = "00 00 00 1 * *")
     public void startJob() {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
@@ -38,7 +53,6 @@ public class BatchScheduler {
 
     }
 
-//
 //    // At 23:59 on day-of-month 30 in April, June, September, and November
 //    @Scheduled(cron = "59 23 30 4,6,9,11 *")
 //    public void startJob() {

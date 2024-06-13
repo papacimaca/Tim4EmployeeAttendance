@@ -15,7 +15,6 @@ public class EmployeeAttendanceWriter {
             "VALUES (?,?,?,?,?,?,?)";
 
     public ItemWriter<EmployeeAttendance> employeeAttendanceItemWriter(DataSource dataSource) {
-        System.out.println("START WRITING EMPLOYEE ATTENDANCE ITEM INTO PREPARED STATEMENT");
         return new JdbcBatchItemWriterBuilder<EmployeeAttendance>()
                 .dataSource(dataSource)
                 .sql(INSERT_EMPLOYEE_ATTENDANCE_SQL)

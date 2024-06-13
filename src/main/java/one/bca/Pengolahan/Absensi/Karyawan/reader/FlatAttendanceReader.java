@@ -16,7 +16,6 @@ public class FlatAttendanceReader {
             "clock_in", "clock_out", "overtime", "leave_status"};
 
     public ItemReader<Attendance> itemReader() {
-        System.out.println("START READ ATTENDANCE INFO FROM CSV");
         FlatFileItemReader<Attendance> itemReader = new FlatFileItemReader<Attendance>();
         itemReader.setLinesToSkip(1);
         itemReader.setResource(new FileSystemResource("data/attendance_data.csv"));

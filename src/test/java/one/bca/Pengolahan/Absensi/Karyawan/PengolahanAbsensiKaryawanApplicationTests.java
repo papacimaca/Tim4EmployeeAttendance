@@ -66,6 +66,7 @@ class PengolahanAbsensiKaryawanApplicationTests {
 	// Launcher
 	@Test
 	void contextLoads() throws Exception {
+		System.out.println("Run contextLoads test");
 		mockMvc.perform(MockMvcRequestBuilders
 						.get("/start-job")
 						.accept(MediaType.APPLICATION_JSON))
@@ -75,6 +76,7 @@ class PengolahanAbsensiKaryawanApplicationTests {
 	// Job
 	@Test
 	void contextLoadsJob() throws Exception {
+		System.out.println("Run contextLoadsJob test");
 		this.jobLauncherTestUtils.getUniqueJobParametersBuilder();
 		this.jobLauncherTestUtils.setJob(job);
 
@@ -85,13 +87,15 @@ class PengolahanAbsensiKaryawanApplicationTests {
 	// Step Employee
 	@Test
 	public void contextLoadsStepEmployee() throws Exception{
+		System.out.println("Run contextLoadsStepEmployee test");
 		JobExecution stepExecutionEmployee = jobLauncherTestUtils.launchStep("getEmployeeStep");
 		Assertions.assertEquals(ExitStatus.COMPLETED,  stepExecutionEmployee.getExitStatus());
 	}
 
 	// Step Attendance
 	@Test
-	public void contextLoadsStepAttedance() throws Exception{
+	public void contextLoadsStepAttendance() throws Exception{
+		System.out.println("Run contextLoadsStepAttendance test");
 		StepExecution stepExecutionEmployee = jobLauncherTestUtils.launchJob().
 				createStepExecution("getEmployeeStep").getJobExecution().createStepExecution("attendanceStep");
 		Assertions.assertEquals(ExitStatus.EXECUTING,  stepExecutionEmployee.getExitStatus());
@@ -100,6 +104,7 @@ class PengolahanAbsensiKaryawanApplicationTests {
 	// Step Report
 	@Test
 	public void contextLoadsStepReport() throws Exception{
+		System.out.println("Run contextLoadsStepReport test");
 		JobExecution stepExecutionReport = jobLauncherTestUtils.launchStep("writeReportStep");
 		Assertions.assertEquals(ExitStatus.COMPLETED,  stepExecutionReport.getExitStatus());
 	}
